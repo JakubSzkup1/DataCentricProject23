@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Store</title>
+</head>
+<body>
+    <h1>Edit Store</h1>
+    <form action="/stores/edit/<%= store.sid %>" method="POST">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" value="<%= store.location %>" required><br>
+
+        <label for="managerId">Manager ID:</label>
+        <input type="text" id="managerId" name="managerId" value="<%= store.mgrid %>" required><br>
+
+        <input type="submit" value="Save">
+    </form>
+    <a href="/stores">Back to Stores</a>
+</body>
+</html>

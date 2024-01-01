@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Managers</title>
+</head>
+<style>
+    /* Simple inner styling for container/table and th,td tags */
+    .Container {
+        padding-left: 25;
+    }
+
+    th,td,table{
+        border: 3px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+    <div class="Container">
+    <h1>Managers</h1>
+    <a href="/managers/add">Add Manager</a> <!-- Link to add a new manager -->
+    <table>
+        <thead>
+            <tr>
+                <th>Manager ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% managers.forEach(manager => { %>
+                <tr>
+                    <td><%= manager._id %></td> 
+                    <td><%= manager.name %></td>
+                    <td><%= manager.salary %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <a href="/">Back to Home</a>
+</div>
+</body>
+</html>

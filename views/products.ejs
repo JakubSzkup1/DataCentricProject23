@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<style>
+    /* Simple inner styling for container/table and th,td tags */
+    .Container {
+        padding-left: 25;
+    }
+
+    th,td,table{
+        border: 3px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+    <div class="Container">
+    <h1>Products</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>Store ID</th>
+                <th>Location</th>
+                <th>Price</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product => { %>
+                <tr>
+                    <td><%= product.pid %></td>
+                    <td><%= product.productdesc %></td>
+                    <td><%= product.sid %></td>
+                    <td><%= product.location %></td>
+                    <td><%= product.price %></td>
+                    <td>
+                        <form action="/products/delete/<%= product.pid %>" method="POST">
+                            <button type="submit">Delete Product</button> <!-- simple delete button -->
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <a href="/">Home</a>
+</div>
+</body>
+</html>

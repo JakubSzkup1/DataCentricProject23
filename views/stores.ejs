@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stores</title>
+</head>
+<style>
+    /* Simple inner styling for container/table and th,td tags */
+    .Container {
+        padding-left: 25;
+    }
+
+    th,td,table{
+        border: 3px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+    <div class="Container">
+    <h1>Stores</h1>
+    <a href="/stores/add">Add Store</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Store ID</th>
+                <th>Location</th>
+                <th>Manager ID</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% stores.forEach(store => { %>
+                <tr>
+                    <td><%= store.sid %></td>
+                    <td><%= store.location %></td>
+                    <td><%= store.mgrid %></td>
+                    <td><a href="/stores/edit/<%= store.sid %>">Update</a></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <a href="/">Back to Home</a>
+</div>
+</body>
+</html>

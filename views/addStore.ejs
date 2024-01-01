@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Store</title>
+</head>
+<body>
+    <h1>Add Store</h1>
+    <form action="/stores/add" method="POST">
+        <label for="sid">Store ID:</label>
+        <input type="text" id="sid" name="sid" required><br>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br>
+
+        <label for="managerId">Manager ID:</label>
+        <input type="text" id="managerId" name="managerId" required><br>
+
+        <input type="submit" value="Add Store">
+    </form>
+    <a href="/stores">Back to Stores</a>
+</body>
+</html>
