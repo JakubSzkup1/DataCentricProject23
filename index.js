@@ -2,7 +2,7 @@
 var express = require('express');
 let ejs = require('ejs');
 var mysql = require('./mySqlDAO'); //SQl DAO
-var mongodbDAO =require('./mongodbDAO'); //MongoDB DAO
+var mongodbDAO = require('./mongodbDAO'); //MongoDB DAO
 var app = express();
 var bodyParser = require('body-parser');
 
@@ -36,9 +36,9 @@ app.get('/stores/add', (req, res) => {
 // Route to handle the post request from add store 
 app.post('/stores/add', (req, res) => {
     const { sid, location, managerId } = req.body;
-    
 
-   
+
+
     mysql.addStore(sid, location, managerId)//function in mySqlDAO
         .then(() => {
             res.redirect('/stores');
@@ -70,9 +70,15 @@ app.post('/stores/edit/:sid', (req, res) => {
     const sid = req.params.sid;
     const { location, managerId } = req.body;
 
-    // Perform input validation, check if managerId exists in MongoDB
+    // validation required
+    if (location.length < 1) {
+        return res.status(400).send('Location must be at least 1 character.');
+    }
+    if (managerId.length !== 4) {
+        return res.status(400).send('Manager ID must be 4 characters.');
+    }
 
-    mysql.updateStore(sid, location, managerId) 
+    mysql.updateStore(sid, location, managerId)
         .then(() => {
             res.redirect('/stores');
         })
@@ -95,7 +101,7 @@ app.get('/products', (req, res) => {
 
 // Route to handle the Delete action for a product   
 app.post('/products/delete/:pid', (req, res) => {  //Issue - cant delete every product **Needs to be fixed*
-                                                   //Error: ER_ROW_IS_REFERENCED_2: Cannot delete or update a parent row:
+                                                    //Error: ER_ROW_IS_REFERENCED_2: Cannot delete or update a parent row:
     const pid = req.params.pid;                    //a foreign key constraint fails (`proj2023`.`product_store`, CONSTRAINT `product_store_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`))
     mysql.deleteProduct(pid) //muySqlDAO function
         .then(() => {
@@ -111,17 +117,17 @@ app.post('/products/delete/:pid', (req, res) => {  //Issue - cant delete every p
 app.get('/managers', (req, res) => {
     //handles Managers page
     mongodbDAO.findAll()
-    .then(managers =>{
-        res.render('managers',{managers:managers});
-    })
-    .catch(err=>{
-        res.status(500).send('Error fetching managers: ' +err.message);
-    });
+        .then(managers => {
+            res.render('managers', { managers: managers });
+        })
+        .catch(err => {
+            res.status(500).send('Error fetching managers: ' + err.message);
+        });
 });
 
 //Route to add managers
 app.get('/managers/add', (req, res) => {
-    res.render('addManager'); 
+    res.render('addManager');
 });
 
 app.post('/managers/add', (req, res) => {
@@ -132,7 +138,7 @@ app.post('/managers/add', (req, res) => {
             res.redirect('/managers');
         })
         .catch((error) => {
-            res.status(500).send(error.message);
+            res.render('addManager', { error: error.message, managerId, name, salary });
         });
 });
 

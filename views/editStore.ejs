@@ -7,8 +7,13 @@
 <body>
     <h1>Edit Store</h1>
     <form action="/stores/edit/<%= store.sid %>" method="POST">
+         <!-- non-editable store id -->
+         <label for="sid">SID:</label>
+         <input type="text" id="sid" name="sid" value="<%= store.sid %>" disabled><br>  <!-- using the disabled attribute to make the sid no editbable  -->
+         
+
         <label for="location">Location:</label>
-        <input type="text" id="location" name="location" value="<%= store.location %>" required><br>
+        <input type="text" id="location" name="location" value="<%= store.location %>"required minlength="1"><br>
 
         <label for="managerId">Manager ID:</label>
         <input type="text" id="managerId" name="managerId" value="<%= store.mgrid %>" required><br>
