@@ -8,11 +8,11 @@
     <h1>Add Manager (MongoDB)</h1>
     <form action="/managers/add" method="POST">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
+        <input type="text" id="name" name="name" required minlength="6"><br> <!-- required minlength =6 so name has to be 6 chars atleast -->
         <label for="salary">Salary:</label>
-        <input type="number" id="salary" name="salary" required><br>
+        <input type="number" id="salary" name="salary" required min="30000" max="70000"><br><!-- salary to be between 30k and 70k -->
         <input type="submit" value="Add Manager">
     </form>
     <a href="/managers">Back to Managers</a>
 </body>
-</htm
+</html>
